@@ -22,6 +22,7 @@ public class Hero implements Character {
         this.name=name;
         this.type=type;
     }
+       
     
     public String Attack(int attackWith)
     {
@@ -43,7 +44,7 @@ public class Hero implements Character {
     public void SkillsList()
     {
         for(int i =0;i<=iSkills;i++){
-        System.out.println(Skills[iSkills]);
+        System.out.println("("+i+")"+Skills[iSkills]);
         }
     }
     

@@ -17,13 +17,21 @@ public class Activity_2 {
     public static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
      int iOption=-1;
-     int data;
+     int data,selectedHero;
+     String Sname;    
+     String Stype;
      char c;
      boolean bStop=false;
+     
+     System.out.println("Hello welcome to my game");
+     System.out.println("Enter your player name");
+     Sname=input.next()+input.nextLine();
+     Player player1= new Player(Sname);
+     
      while(bStop==false)
      {
          System.out.println("(1) New Hero");
-         System.out.println("(2) Select Hero");
+         System.out.println("(2) Select Hero to act");
          System.out.println("(9) Exit");
          
          iOption=input.nextInt();
@@ -31,19 +39,29 @@ public class Activity_2 {
          switch(iOption)
          {
              case 1:
-                    /*
-                    Heroes.getList();
-                    */
+                    System.out.println("Creating a new Hero");
+                    System.out.println("Enter hero name");
+                    Sname=input.next()+input.nextLine();                    
+                    System.out.println("Enter Hero Type");
+                    Stype=input.next()+input.nextLine();
+                    
                     break;
              case 2:
-                    /*
-                    Player.getHeroes();
-                    */
+                    player1.getHeroes();
+                    selectedHero=input.nextInt();
                     System.out.println("(1) Attack");
                     System.out.println("(2) Block");
-                    System.out.println("(3) Upgrade");
+                    System.out.println("(3) Upgrade");                    
+                    data=input.nextInt();
+                    if(data<3 && data!=0)
+                    {
+                        player1.action(data,selectedHero);
+                    }
+                    else
+                        player1.upgradeHero(selectedHero);                        
                     break;
              case 9:
+                    bStop=true;
                     break;
              default:
                     System.out.println("Invalid option try agaian");  
