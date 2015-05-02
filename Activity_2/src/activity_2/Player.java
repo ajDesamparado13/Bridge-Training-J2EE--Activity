@@ -15,44 +15,55 @@ public class Player{
     //maximum number of heroes for a player is 5 
     String sPlayerName;
     Hero heroes [] = new Hero [5];
-    int currentHeroes=0;
+    int iCurrentHeroes=0;
     
     public Player(String name)
     {
         sPlayerName=name;
     }
     
-    public void action(int playerAct,int character)
+    public void blockAction(int selectedHero)
     {
-        switch(playerAct)
-        {
-            case 1://attack
-                    break;
-            case 2://block
-                   heroes[character].Block();
-                    break;
-            case 3://upgrade
-                    break;
-            default:
-                    break;                  
-        }
+        System.out.println(
+         "********************************\n"
+        +" "+heroes[selectedHero].Block()+"\n"
+        +"********************************\n");
+    }
+    public void attackAction(int selectedHero,int skillUse){
+        
+      System.out.println(
+         "********************************\n"
+        +" "+heroes[selectedHero].Attack(skillUse)+"\n"
+        +"********************************\n");
     }
     
     public void newHero(String name,String type,String skill)
     {
-        heroes[0]=new Hero(name,type);
-        heroes[0].addSkill(skill);
+        heroes[iCurrentHeroes]=new Hero(name,type);
+        heroes[iCurrentHeroes].addSkill(skill);
+        iCurrentHeroes++;
     }
     
-    public void upgradeHero(int character)
+    public void upGradeHero(int character,String sUpgrade)
     {
-        
+      
+        heroes[character].addSkill(sUpgrade);
     }
     
     public void getHeroes()
+    {   
+        for(int i=0;i<iCurrentHeroes;i++)
+            System.out.println("("+i+") "+heroes[i].getName());
+    }
+    
+    public void getHeroSkills(int character)
     {
-        for(int i=0;i<=currentHeroes;i++)
-            System.out.println("("+i+") "+heroes[i]);
+      heroes[character].SkillsList();
+    }
+    
+    public boolean noHeroes()
+    {
+        return iCurrentHeroes==0;
     }
     
     

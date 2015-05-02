@@ -10,6 +10,7 @@ package activity_2;
  * @author asi
  */
 public class Hero implements Character {
+    
     String name;
     String type;
     String attack;
@@ -26,9 +27,8 @@ public class Hero implements Character {
     
     public String Attack(int attackWith)
     {
-        attack+="Attacking with "+Skills[attackWith];
-        
-        return attack;
+
+        return attack="Attacking with "+Skills[attackWith];
     }
     
     public String Block()
@@ -41,23 +41,27 @@ public class Hero implements Character {
        this.type=type;
     }
     
+  
+    @Override
     public void SkillsList()
     {
-        for(int i =0;i<=iSkills;i++){
-        System.out.println("("+i+")"+Skills[iSkills]);
+        for(int i =0;i<iSkills;i++){
+        System.out.println("("+i+") "+getSkill(i));
         }
+    }
+    
+    public String getSkill(int num)
+    {
+        return Skills[num];
     }
     
     public void addSkill(String skillName)
     {
         Skills[iSkills]=skillName;
+        iSkills++;
         
     }
     
-    public void setHeroName(String name)
-    {
-        this.name = name;
-    }
     
     public String getName()
     {

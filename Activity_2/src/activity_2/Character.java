@@ -11,6 +11,8 @@ package activity_2;
  */
 public interface Character {
     
+    //A hero is a type of a character
+    
     public String Attack(int attackWith);
     public String Block();
     public void   CharacterType(String type);
