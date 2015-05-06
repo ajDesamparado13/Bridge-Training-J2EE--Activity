@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<web-app>
+    <servlet>
+        <servlet-name>HelloWorld</servlet-name>        
+        <servlet-class>com.servlet.HelloWorldServlet</servlet-class>        
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ProcessAdmin</servlet-name>
+        <servlet-class>com.servlet.ProcessAdminServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ProcessUser</servlet-name>
+        <servlet-class>com.servlet.ProcessUserServlet</servlet-class>
+    </servlet>
+    
+    <!--
+        Servlet Mappings
+    -->
+    
+    <servlet-mapping>
+        <servlet-name>HelloWorld</servlet-name>
+        <url-pattern>/Hello</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ProcessAdmin</servlet-name>
+        <url-pattern>/HelloAdmin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ProcessUser</servlet-name>
+        <url-pattern>/HelloUser</url-pattern>        
+    </servlet-mapping>
+    
+</web-app>
