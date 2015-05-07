@@ -12,12 +12,18 @@ and open the template in the editor.
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.login.LoginServlet</servlet-class>        
     </servlet>
-    
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.logout.LogoutServlet</servlet-class>
+    </servlet>
     
     <!--
     Servlet-Mapping
     -->
-    
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/home</url-pattern>
