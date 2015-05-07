@@ -10,11 +10,11 @@ and open the template in the editor.
     
     <servlet>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.login.LoginServlet</servlet-class>        
+    <servlet-class>com.controller.LoginServlet</servlet-class>        
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.logout.LogoutServlet</servlet-class>
+        <servlet-class>com.controller.LogoutServlet</servlet-class>
     </servlet>
     
     <!--

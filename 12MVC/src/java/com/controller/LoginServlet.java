@@ -5,6 +5,7 @@
  */
 package com.controller;
 
+import com.dao.UserDao;
 import com.model.UserBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,6 +44,8 @@ public class LoginServlet extends HttpServlet {
             String password = request.getParameter("password");
       
             UserBean User = new UserBean();
+            User.setPassword(password);
+            User.setUsername(username);
             
             
             RequestDispatcher view;
@@ -50,15 +53,15 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             
-            /*   
-            if(isUserValid){
+           
+            if(UserDao.isValid(User)){
                 view = request.getRequestDispatcher("home.jsp");
                 view.forward(request, response);                
             }else{
                 view=request.getRequestDispatcher("index.html");              
                 view.forward(request, response);
             }             
-            */
+           
            
             
         }
