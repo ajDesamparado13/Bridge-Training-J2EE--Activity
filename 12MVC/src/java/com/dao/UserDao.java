@@ -42,14 +42,5 @@ public class UserDao {
         }
         return result;
     }
-    /*
-    public static void main(String [] args){
-        UserBean user = new UserBean();
-        user.setPassword("wew");
-        user.setUsername("wew");
-        
-        System.out.println(UserDao.isValid(user));
-    }
-    */
 }
 
