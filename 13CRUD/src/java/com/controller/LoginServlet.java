@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author asi
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -53,11 +52,11 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();            
             boolean isValid = UserDao.isValid(User);    
             session.setAttribute("username", username);
-           System.out.println(username);
+            System.out.println(username);
             
             if(isValid){                
-                session.setAttribute("users", UserDao.getAllUsers());                
-                view = request.getRequestDispatcher("home.jsp");               
+                session.setAttribute("users",UserDao.getAllUsers());
+                view = request.getRequestDispatcher("/home.jsp");               
                 view.forward(request, response);                
                 
             }else{

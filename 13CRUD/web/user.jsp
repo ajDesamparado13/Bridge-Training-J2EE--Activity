@@ -14,13 +14,14 @@
     </head>    
     <body>
          <div>
-            <form method="POST" action="home">
-                <p>
-                    Username: <input type="text" name="username" value="<c:out value="${user.username}"/>"><br>
-                    Password: <input type="password" name="password" value="<c:out value="${user.password}"/>">
-                    <input type="submit" value="login">                    
-                </p>
+             
+            <form method="post" action="UserController">
+            <input type="hidden" name="userid" value="<c:out value="${user.userId}"/>">
+            Username:<input type="text" name="username" value="<c:out value="${user.username}"/>"> <br/>
+            Password:<input type="password" name="password" value="<c:out value="${user.password}"/>"> <br/>
+            <input type="submit" value="Submit">
             </form>
+            
         </div>
     </body>
 </html>

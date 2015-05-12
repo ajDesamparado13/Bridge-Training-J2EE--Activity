@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServlet;
 
 /**
  *
  * @author asi
  */
-public class UserDao {
+public class UserDao extends HttpServlet {
     
     public static boolean isValid(UserBean user){
         boolean result = false;
@@ -49,17 +50,12 @@ public class UserDao {
     }
     
     public static void AddUser(UserBean user){
-        dbUtil db = new dbUtil();
-        Connection connection = db.getConnection();
-        
+        dbUtil db = new dbUtil();        
         try{
-            PreparedStatement stmt = connection.prepareStatement(""+
-                    "insert into users values(?,?) ");
+            PreparedStatement stmt = db.getConnection().prepareStatement("insert into users(username, password) values (?,?)");
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
-            ResultSet rs = stmt.executeQuery();
-                        
-            rs.close();
+            stmt.executeUpdate();            
             stmt.close();
             db.disconnect();
         }catch(SQLException e){
@@ -71,13 +67,11 @@ public class UserDao {
     public static void DeleteUser(int userId)
     {        
         dbUtil db = new dbUtil();
-        Connection connection = db.getConnection();
-        try{
-            Statement stmt = db.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery("Delete from users where userid="+userId);
+        try{ 
             
-            
-            rs.close();
+            PreparedStatement stmt = db.getConnection().prepareStatement("delete from users where userid=?");
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
             stmt.close();
             db.disconnect();
         }catch(SQLException e){
@@ -85,22 +79,19 @@ public class UserDao {
         }  
     }
     
-    public static void UpdateUser(UserBean updatedUser)
+    public static void UpdateUser(UserBean user)
     {
         
        dbUtil db = new dbUtil();
        Connection connection = db.getConnection();
        try{
-           PreparedStatement stmt = connection.prepareStatement(
-           "Update users SET username=?,password=? Where userid=?");
-           stmt.setString(1,updatedUser.getUsername());
-           stmt.setString(2,updatedUser.getPassword());
-           stmt.setString(3,Integer.toString(updatedUser.getUserID()));
-           ResultSet rs = stmt.executeQuery();
-           
-           rs.close();
-           stmt.close();
-           db.disconnect();
+          PreparedStatement stmt = db.getConnection().prepareStatement("update users set username=?, password=? where userid=?");
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setInt(3, user.getUserID());
+            stmt.executeUpdate();
+            stmt.close();
+            db.disconnect();
        }catch(SQLException e){
         Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE,null,e);
         
@@ -114,15 +105,18 @@ public class UserDao {
        dbUtil db = new dbUtil();
        Connection connection = db.getConnection();
        try{
-        Statement stmt = db.getConnection().createStatement();
-       ResultSet rs = stmt.executeQuery("select * from users where userid="+userId);
-       user.setPassword(rs.getString("password"));
-       user.setUsername(rs.getString("username"));
-       user.setUserId(userId);
-           
-       rs.close();
-       stmt.close();
-       db.disconnect();
+            PreparedStatement stmt = db.getConnection().prepareStatement("select * from users where userid=?");
+            stmt.setInt(1, userId);
+            
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                user.setUserId(rs.getInt("userid"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+            }
+            rs.close();
+            stmt.close();
+            db.disconnect();
        
        }catch(SQLException e){
         Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE,null,e);
@@ -147,7 +141,7 @@ public class UserDao {
             stmt.close();
             db.disconnect();
         }catch(SQLException e){
-            
+              Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
         }  
         return users;
     }  
@@ -156,7 +150,15 @@ public class UserDao {
             
     {
         for(UserBean user:UserDao.getAllUsers())
-        System.out.println(user.toString());
+        System.out.println(user.toString());              
+        
+            //UserDao.addUser(user);
+            //UserDao.updateUser(user);
+//            List<UserBean> list = UserDao.getAllUsers();
+//            for(UserBean a:list)
+//                System.out.println(a.getUsername());
+            
+            //System.out.println(UserDao.getUserById(1).getUsername());
     }
 }
 

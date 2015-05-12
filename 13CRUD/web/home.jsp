@@ -1,17 +1,19 @@
-<%-- 
-    Document   : home
-    Created on : 05 6, 15, 3:55:09 PM
-    Author     : asi
---%>
+<%@page import="com.dao.UserDao"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="com.model.UserBean"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" 
+    contentType="text/html; charset=windows-1256"
+    pageEncoding="windows-1256"
+%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     response.setHeader("Cache-Control","no-store, must revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", -1);
-    
+    session.setAttribute("users",UserDao.getAllUsers());
    if(session.getAttribute("username")!=null){
     
 %>
@@ -39,13 +41,13 @@
                     <th colspan="2">Action</th>
                 </tr>                
             </thead>
-            <tbody>                
-                <c:forEach items="${users}"  var="user">
+            <tbody>                                
+                <c:forEach items="users"  var="user">
                     <tr>
-                        <td><c:out value="${user.username}"/></td>
-                        <td><c:out value="${user.password}"/></td>
-                        <td><a href="usersForm?action=edit&userId=<c:out value="${user.userId}"/>"/>Edit</td>
-                        <td><a href="usersForm?action=delete&userId=<c:out value="${user.userId}"/>"/>Delete</td>
+                        <td>${user.username}/></td>
+                        <td>${user.password}/></td>
+                        <td><a href="UserController?action=edit&userid=<c:out value="${user.userId}"/>"/>Edit</td>
+                        <td><a href="UserController?action=delete&userid=<c:out value="${user.userId}"/>"/>Delete</td>
                     </tr>
                 </c:forEach>
             </tbody>

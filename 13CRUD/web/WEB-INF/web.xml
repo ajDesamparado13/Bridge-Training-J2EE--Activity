@@ -27,7 +27,7 @@ and open the template in the editor.
     -->
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
-        <url-pattern>/usersForm</url-pattern>
+        <url-pattern>/UserController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
